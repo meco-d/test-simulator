@@ -22,7 +22,7 @@ class Test(QtWidgets.QMainWindow, Ui_MainWindow):
         self.nr = 0
         self.question_ids = self.generate_question_id_list()
         self.setupUi(self)
-        
+        self.back_btn.setText("Exit")
         self.RadioGroup = QtWidgets.QButtonGroup()
         self.RadioGroup.addButton(self.r_1)
         self.RadioGroup.addButton(self.r_2)
@@ -69,8 +69,18 @@ class Test(QtWidgets.QMainWindow, Ui_MainWindow):
             self.write_data(self.data_list[self.nr])
 
     def write_data(self, data):
-        
-        self.question_lbl.setText(data['question'])
+        self.ans_1.show()
+        self.r_1.show()
+        self.ans_2.show()
+        self.r_2.show()
+        self.ans_3.show()
+        self.r_3.show()
+        self.ans_4.show()
+        self.r_4.show()
+        self.ans_5.show()
+        self.r_5.show()
+
+        self.question_lbl.setText(str(self.nr+1) + ". "+data['question'])
         self.label.setText(data['subject'])
         if len(data['answers']) == 5:
             self.ans_1.setText(data['answers'][0])
@@ -105,7 +115,7 @@ class Test(QtWidgets.QMainWindow, Ui_MainWindow):
             self.r_5.setChecked(True)
     
     def generate_question_id_list(self):
-        return random.sample(range(0, 3086), 100)
+        return random.sample(range(0, 3086), 5)
 
     def read_question(self, id_list):
         data_list = []
@@ -180,7 +190,7 @@ class Test(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.a = TestResult(self.data_list)
                 self.a.show()
                 self.close()
-        
+
 
 from dashboard_contoller import Dashboard
 from test_result_controller import TestResult
